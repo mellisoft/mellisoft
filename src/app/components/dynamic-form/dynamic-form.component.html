@@ -1,0 +1,59 @@
+<div class="flex-container">
+<form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()" novalidate>
+  <ng-container *ngFor="let controls of formInfo">
+        <ng-container *ngIf="controls.type == 'input'">
+            <mat-form-field >
+                <mat-label>{{controls.label}}</mat-label>
+                <input matInput [type]="controls.type" [formControlName]="controls.name">
+              </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="controls.type == 'password'">
+            <mat-form-field >
+                <mat-label>{{controls.label}}</mat-label>
+                <input matInput [type]="controls.type" [formControlName]="controls.name">
+              </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="controls.type == 'select'">
+              <mat-form-field>
+                <mat-label>{{controls.label}}</mat-label>
+                <mat-select [formControlName]="controls.name">
+                  <mat-option *ngFor="let option of controls.options" [value]="option">{{ option }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="controls.type == 'textarea'">
+          <mat-form-field>
+            <mat-label>{{controls.label}}</mat-label>
+            <textarea matInput [type]="controls.type" [formControlName]="controls.name"></textarea>
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="controls.type == 'radio'">
+          <mat-label>{{controls.label}}</mat-label>
+                <mat-radio-group [formControlName]="controls.name">
+                  <mat-radio-button *ngFor="let option of controls.options"  [value]="option.code">{{ option.label }}</mat-radio-button>
+                </mat-radio-group>
+        </ng-container>
+        <ng-container *ngIf="controls.type == 'date'">
+          <mat-form-field>
+            <mat-label>{{controls.label}}</mat-label>
+            <input matInput [matDatepicker]="picker" [formControlName]="controls.name">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="controls.type == 'file'">
+          <mat-form-field>
+            <mat-label>{{controls.label}}</mat-label>
+            <ngx-mat-file-input [formControlName]="controls.name" [multiple]="controls.multiple" [accept]="controls.accept" (change)="onFileChange($event)">
+              <mat-icon ngxMatFileInputIcon>folder</mat-icon> 
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </ng-container>
+      </ng-container>
+  <div fxFlex="100">
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+  </div>
+</form>
+</div>
+{{result |json}}

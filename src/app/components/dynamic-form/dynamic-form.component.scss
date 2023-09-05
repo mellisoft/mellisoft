@@ -1,0 +1,36 @@
+.flex-container {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 5px;
+  }
+
+  .flex-container mat-form-field {
+    width: 48%;
+    margin: 5px;
+  }
+  
+  .flex-container form {
+    margin: 10px;
+  }
+  
+  // .flex-container form > * {
+  //   margin: 12px 0;
+  // }
+  
+  .flex-container .mat-radio-button {
+    margin: 0 12px;
+  }
+  
+  .example-form-fields {
+    display: flex;
+    align-items: flex-start;
+  }
+  @media (max-width: 800px) {
+    .flex-container {
+      flex-direction: column;
+    }
+    .flex-container mat-form-field {
+      width: 98%;
+      margin: 5px;
+    }
+  }
